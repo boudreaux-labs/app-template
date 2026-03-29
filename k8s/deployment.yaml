@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: APP_NAME
+  namespace: APP_NAME
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: APP_NAME
+  template:
+    metadata:
+      labels:
+        app: APP_NAME
+    spec:
+      containers:
+        - name: APP_NAME
+          image: ghcr.io/boudreaux-labs/APP_NAME:latest
+          ports:
+            - containerPort: 80
+          resources:
+            requests:
+              cpu: 50m
+              memory: 32Mi
+            limits:
+              cpu: 100m
+              memory: 64Mi

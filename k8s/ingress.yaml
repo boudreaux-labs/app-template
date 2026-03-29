@@ -1,0 +1,25 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: APP_NAME
+  namespace: APP_NAME
+  annotations:
+    alb.ingress.kubernetes.io/scheme: internet-facing
+    alb.ingress.kubernetes.io/target-type: ip
+    alb.ingress.kubernetes.io/listen-ports: '[{"HTTP":80},{"HTTPS":443}]'
+    alb.ingress.kubernetes.io/ssl-redirect: '443'
+    external-dns.alpha.kubernetes.io/hostname: APP_NAME.boudreauxlabs.com
+    # cert-arn injected at deploy time via ApplicationSet kustomize patch
+spec:
+  ingressClassName: alb
+  rules:
+    - host: APP_NAME.boudreauxlabs.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: APP_NAME
+                port:
+                  number: 80
