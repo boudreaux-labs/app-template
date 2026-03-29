@@ -18,7 +18,7 @@ spec:
           image: ghcr.io/boudreaux-labs/APP_NAME:REPLACE_WITH_SHA
           imagePullPolicy: IfNotPresent
           ports:
-            - containerPort: 8080
+            - containerPort: APP_PORT
           resources:
             requests:
               cpu: 50m
